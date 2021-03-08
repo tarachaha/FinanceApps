@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Shares</th>
+        <th>Price</th>
+        <th>TOTAL</th>
+    </tr>
+    <tr>
+        <th>CS50</th>
+        <th>Your check</th>
+        <th>checks for exact const prices</th>
+        <th>$112.00</th>
+        <th>$9,888.00</th>
+    </tr>
+    {% for h in holding %}
+        <tr>
+            <td>{{ h.name }}</td>
+            <td>{{ h.symbol }}</td>
+            <td>{{ h.shares }}</td>
+            <td>{{ h.price }}</td>
+            <td>{{ h.total }}</td>
+        </tr>
+    {% endfor %}
+
+    <tr>
+        <td>CASH</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ cash }}</td>
+    </tr>
+    <tfoot>
+        <td colspan="4"></td>
+        <td>{{ alltotal }}</td>
+    </tfoot>
+</table>
+{% endblock %}
