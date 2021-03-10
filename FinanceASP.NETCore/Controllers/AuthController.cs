@@ -1,7 +1,10 @@
-﻿using FinanceASP.NETCore.Dtos;
+﻿using AutoMapper;
+using FinanceASP.NETCore.Authorization;
+using FinanceASP.NETCore.Dtos;
 using FinanceASP.NETCore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,22 +21,20 @@ namespace FinanceASP.NETCore.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _config = config;
         }
 
 
         // POST api/<AuthController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var user = await _userManager.FindByEmailAsync(userForLoginDto.Email);
