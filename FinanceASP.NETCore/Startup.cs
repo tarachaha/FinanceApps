@@ -1,6 +1,7 @@
 using AutoMapper;
 using FinanceASP.NETCore.Data;
 using FinanceASP.NETCore.Models;
+using FinanceASP.NETCore.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,6 +51,7 @@ namespace FinanceASP.NETCore
             services.AddDbContext<FinanceDbContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IHoldingsRepository, HoldingsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
